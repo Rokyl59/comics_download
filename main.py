@@ -51,8 +51,8 @@ def publish_photos(bot, chat_id, alt_text):
 
 if __name__ == "__main__":
     load_dotenv()
-    telegram_token_api = '7100534990:AAG52xwXfncSxcDIbUTCTZTa3RpDOUF6C1k'
-    telegram_chat_id = os.getenv("")
+    telegram_token_api = os.getenv("TG_TOKEN_API")
+    telegram_chat_id = os.getenv("TG_CHAT_ID")
 
     bot = telegram.Bot(token=telegram_token_api)
 
