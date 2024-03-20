@@ -46,8 +46,8 @@ if __name__ == "__main__":
     load_dotenv()
     os.makedirs('Files', exist_ok=True)
 
-    telegram_api_token = os.getenv("TG_API_TOKEN")
-    telegram_chat_id = os.getenv("TG_CHAT_ID")
+    telegram_api_token = os.environ("TG_API_TOKEN")
+    telegram_chat_id = os.environ("TG_CHAT_ID")
 
     bot = telegram.Bot(token=telegram_api_token)
 
