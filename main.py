@@ -17,7 +17,6 @@ def download_comic(num_comics):
     download_image.raise_for_status()
 
     content_comics = download_image.content
-    os.makedirs('Files', exist_ok=True)
 
     with open('Files/comics.png', 'wb') as file:
         file.write(content_comics)
@@ -44,6 +43,8 @@ def publish_photos(bot, chat_id, alt_text):
 
 if __name__ == "__main__":
     load_dotenv()
+    os.makedirs('Files', exist_ok=True)
+    
     telegram_token_api = os.getenv("TG_TOKEN_API")
     telegram_chat_id = os.getenv("TG_CHAT_ID")
 
