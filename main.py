@@ -3,6 +3,7 @@ import os
 import telegram
 import random
 from dotenv import load_dotenv
+from pathlib import Path
 
 
 def download_comic(num_comics):
@@ -18,7 +19,7 @@ def download_comic(num_comics):
 
     comic_content = download_image.content
 
-    with open('Files/comics.png', 'wb') as file:
+    with open(Path('Files') / 'comic.png', 'wb') as file:
         file.write(comic_content)
 
     return comics_alt
@@ -37,7 +38,7 @@ def search_all_comics():
 
 
 def publish_photo(bot, chat_id, alt_text):
-    with open('Files/comics.png', 'rb') as file:
+    with open(Path('Files') / 'comic.png', 'rb') as file:
         bot.send_photo(chat_id=chat_id, photo=file, caption=alt_text)
 
 
@@ -45,10 +46,10 @@ if __name__ == "__main__":
     load_dotenv()
     os.makedirs('Files', exist_ok=True)
 
-    telegram_token_api = os.getenv("TG_TOKEN_API")
+    telegram_api_token = os.getenv("TG_API_TOKEN")
     telegram_chat_id = os.getenv("TG_CHAT_ID")
 
-    bot = telegram.Bot(token=telegram_token_api)
+    bot = telegram.Bot(token=telegram_api_token)
 
     num_comics = search_all_comics()
 
@@ -56,4 +57,4 @@ if __name__ == "__main__":
 
     publish_photo(bot, telegram_chat_id, alt_text)
 
-    os.remove("Files/comics.png")
+    os.remove("Files/comic.png")
