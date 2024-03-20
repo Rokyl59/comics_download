@@ -16,10 +16,10 @@ def download_comic(num_comics):
     download_image = requests.get(comics_url)
     download_image.raise_for_status()
 
-    content_comics = download_image.content
+    content_comic = download_image.content
 
     with open('Files/comics.png', 'wb') as file:
-        file.write(content_comics)
+        file.write(content_comic)
 
     return comics_alt
 
@@ -36,7 +36,7 @@ def search_all_comics():
     return num_comics
 
 
-def publish_photos(bot, chat_id, alt_text):
+def publish_photo(bot, chat_id, alt_text):
     with open('Files/comics.png', 'rb') as file:
         bot.send_photo(chat_id=chat_id, photo=file, caption=alt_text)
 
@@ -44,7 +44,7 @@ def publish_photos(bot, chat_id, alt_text):
 if __name__ == "__main__":
     load_dotenv()
     os.makedirs('Files', exist_ok=True)
-    
+
     telegram_token_api = os.getenv("TG_TOKEN_API")
     telegram_chat_id = os.getenv("TG_CHAT_ID")
 
@@ -54,6 +54,6 @@ if __name__ == "__main__":
 
     alt_text = download_comic(num_comics)
 
-    publish_photos(bot, telegram_chat_id, alt_text)
+    publish_photo(bot, telegram_chat_id, alt_text)
 
     os.remove("Files/comics.png")
