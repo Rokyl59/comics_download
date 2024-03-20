@@ -46,15 +46,17 @@ if __name__ == "__main__":
     load_dotenv()
     os.makedirs('Files', exist_ok=True)
 
-    telegram_api_token = os.environ("TG_API_TOKEN")
-    telegram_chat_id = os.environ("TG_CHAT_ID")
+    try:
+        telegram_api_token = os.environ("TG_API_TOKEN")
+        telegram_chat_id = os.environ("TG_CHAT_ID")
 
-    bot = telegram.Bot(token=telegram_api_token)
+        bot = telegram.Bot(token=telegram_api_token)
 
-    num_comics = search_all_comics()
+        num_comics = search_all_comics()
 
-    alt_text = download_comic(num_comics)
+        alt_text = download_comic(num_comics)
 
-    publish_photo(bot, telegram_chat_id, alt_text)
+        publish_photo(bot, telegram_chat_id, alt_text)
 
-    os.remove("Files/comic.png")
+    finally:
+        os.remove("Files/comic.png")
