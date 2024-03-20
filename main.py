@@ -16,10 +16,10 @@ def download_comic(num_comics):
     download_image = requests.get(comics_url)
     download_image.raise_for_status()
 
-    content_comic = download_image.content
+    comic_content = download_image.content
 
     with open('Files/comics.png', 'wb') as file:
-        file.write(content_comic)
+        file.write(comic_content)
 
     return comics_alt
 

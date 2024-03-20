@@ -29,7 +29,7 @@ git clone https://github.com/Rokyl59/comics_download.git
 
 * `TG_CHAT_ID`: ID чата в Telegram, в который вы хотите публиковать комиксы.
 
-* `TG_TOKEN_API`: API бота, получить от _BotFather_
+* `TG_API_TOKEN`: API бота, получить от _BotFather_
 
 ## Использование
 
