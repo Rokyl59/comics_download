@@ -5,22 +5,13 @@ import random
 from dotenv import load_dotenv
 
 
-def alt_text_comics(num_comics):
-    url = f'https://xkcd.com/{num_comics}/info.0.json'
-
-    response = requests.get(url)
-    response.raise_for_status()
-    comics_alt = response.json()['alt']
-
-    return comics_alt
-
-
-def download_comics_image(num_comics):
+def download_comic(num_comics):
     url = f'https://xkcd.com/{num_comics}/info.0.json'
 
     response = requests.get(url)
     response.raise_for_status()
     comics_url = response.json()['img']
+    comics_alt = response.json()['alt']
 
     download_image = requests.get(comics_url)
     download_image.raise_for_status()
@@ -30,6 +21,8 @@ def download_comics_image(num_comics):
 
     with open('Files/comics.png', 'wb') as file:
         file.write(content_comics)
+
+    return comics_alt
 
 
 def search_all_comics():
@@ -58,8 +51,7 @@ if __name__ == "__main__":
 
     num_comics = search_all_comics()
 
-    download_comics_image(num_comics)
-    alt_text = alt_text_comics(num_comics)
+    alt_text = download_comic(num_comics)
 
     publish_photos(bot, telegram_chat_id, alt_text)
 
